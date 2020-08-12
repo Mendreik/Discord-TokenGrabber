@@ -1,6 +1,6 @@
 **DISCORD TOKEN GRABBER**
 
-Code made 100% using NodeJS together with the `Axios` &` Node-Fetch` packages.
+Code in `NodeJS` using framework's `Axios` & `Node-Fetch`
 
 **INSTALL**
 
